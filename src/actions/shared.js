@@ -1,18 +1,19 @@
-import API from '../utils/api';
+import { getInitialData } from '../utils/api';
 
 export const RECEIVE_DATA = 'RECEIVE_DATA';
 
-
-function receiveData(polls, users) {
+function receiveData(users, polls) {
     return {
         type: RECEIVE_DATA,
-        polls,
         users,
+        polls,
     }
 }
 
-export function handleIntialData() {
+export function handleInitialData() {
     return (dispatch) => {
-        API.getInitalData()
+        return getInitialData().then(({users, polls}) => {
+            dispatch(receiveData(users, polls));
+        })
     }
 }

@@ -1,4 +1,4 @@
-import API from '../utils/api';
+import {savePoll, savePollAnswer } from '../utils/api';
 
 export const ADD_POLL = 'ADD_POLL';
 export const REMOVE_POLL = 'REMOVE_POLL';
@@ -18,10 +18,9 @@ function removePoll(id) {
     }
 }
 
-
 function handleAddPoll(poll, cb) {
     return (dispatch) => {
-        return API.savePoll(poll).then((response) => {
+        return savePoll(poll).then((response) => {
             dispatch(addPoll(poll));
             cb();
         })
@@ -29,8 +28,6 @@ function handleAddPoll(poll, cb) {
     }
 
 }
-
-
 
 // TODO: create remove poll ability
 function handleRemovePoll(poll) {
