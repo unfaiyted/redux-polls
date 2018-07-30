@@ -11,7 +11,6 @@ function addPoll(poll) {
     }
 }
 
-
 function removePoll(id) {
     return {
         type: REMOVE_POLL,

@@ -19,7 +19,8 @@ function removeUser(id) {
 }
 
  export function handleAddUser(user, cb) {
-
+    return (dispatch) => {
+    }
  }
 
  export function handleDeleteUser(user) {
