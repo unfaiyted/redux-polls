@@ -17,9 +17,8 @@ class AppRoutes extends React.Component {
                     <Route exact path='/' component={Polls}/>
                     <Route exact path='/leaderboard' component={Leaderboard}/>
                     <Route exact path='/add' component={PollAdd}/>
-                    <Route path='/poll' component={Poll} />
+                    <Route path='/poll/:id' component={Poll} />
                 </Switch>
-
         )
     }
 

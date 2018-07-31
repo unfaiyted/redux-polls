@@ -7,6 +7,7 @@ import {
 import {
     ADD_POLL
 } from "../actions/polls";
+import {ADD_ANSWER} from "../actions/answers";
 
 
 export default function users(state = {}, action) {
@@ -17,7 +18,7 @@ export default function users(state = {}, action) {
             return state.filter((user) => user.id !== action.id);
         case ADD_POLL:
             const poll = action.poll;
-            const { author, id } = poll;
+            const {author, id} = poll;
             return {
                 ...state,
                 [author]: {
@@ -25,7 +26,20 @@ export default function users(state = {}, action) {
                     polls: state[author].polls.concat([id])
                 }
 
-            }
+            };
+        case ADD_ANSWER:
+            const { authedUser } = action;
+            const user =  state[action.authedUser];
+            return {
+                //spread current state
+                ...state,
+                //get the authed user from that
+                [authedUser]: {
+                    ...user, //spread the user data from the user
+                    // add the answer
+                    answers: user.answers.concat(action.id)
+                }
+            };
         case RECEIVE_USERS:
             return ({
                 ...state,

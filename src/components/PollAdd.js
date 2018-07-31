@@ -36,7 +36,7 @@ class PollAdd extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-
+        this.props.history.push('/');
          console.log('Add poll: ', this.state);
         //
         this.props.dispatch(handleAddPoll(this.state, () => {
