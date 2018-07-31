@@ -235,3 +235,9 @@ input {
 .input:focus {
   border-color: gray;
 }
+
+
+.link:hover {
+  font-size: 18px;
+  font-weight: bold;
+}

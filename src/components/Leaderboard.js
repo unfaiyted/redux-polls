@@ -11,7 +11,7 @@ class Leaderboard extends React.Component {
                 <ul>
                 {
                     leaders.map((leader) => {
-                        return <LeaderboardUser leader={leader} />
+                        return <LeaderboardUser leader={leader} key={leader.id} />
                     })
                 }
                 </ul>

@@ -10,7 +10,12 @@ class PollItems extends React.Component {
             <ul>
                 { items.map( (item) => {
                     return  ( <li key={item.id}>
-                            <Link to={'/poll/' + item.id} >  {item.question} </Link></li>
+                                <Link
+                                    className={'link'}
+                                    to={'/poll/' + item.id} >
+                                    {item.question}
+                                </Link>
+                            </li>
                     )
                 })}
 
