@@ -2,6 +2,7 @@
 
 export const ADD_USER = 'ADD_USER';
 export const REMOVE_USER = 'REMOVE_USER';
+export const RECEIVE_USERS = 'RECEIVE_USERS';
 
 
 function addUser(user) {
@@ -16,6 +17,13 @@ function removeUser(id) {
         type: REMOVE_USER,
         id
     }
+}
+
+export function receiveUsers(users) {
+    return ({
+        type: RECEIVE_USERS,
+        users,
+    })
 }
 
  export function handleAddUser(user, cb) {

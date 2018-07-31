@@ -120,6 +120,14 @@ li {
   font-size: 22px;
 }
 
+.dashboard-toggle li {
+  cursor: pointer;
+}
+
+.dashboard-toggle .active {
+  text-decoration: underline;
+}
+
 .dashboard-list {
   font-size: 18px;
   letter-spacing: .4px;

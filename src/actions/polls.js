@@ -2,6 +2,7 @@ import {savePoll, savePollAnswer } from '../utils/api';
 
 export const ADD_POLL = 'ADD_POLL';
 export const REMOVE_POLL = 'REMOVE_POLL';
+export const RECEIVE_POLLS = 'RECEIVE_POLLS';
 
 
 function addPoll(poll) {
@@ -16,6 +17,15 @@ function removePoll(id) {
         type: REMOVE_POLL,
         id
     }
+}
+
+
+export function receivePolls(polls) {
+    return {
+        type: RECEIVE_POLLS,
+        polls,
+    }
+    
 }
 
 function handleAddPoll(poll, cb) {

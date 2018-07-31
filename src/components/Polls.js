@@ -1,49 +1,85 @@
 import React from 'react';
 import {connect} from "react-redux";
 import { Link } from 'react-router-dom'
+import PollAdd from "./PollAdd";
 
 
-class PollStatusNav extends React.Component {
+class PollItems extends React.Component {
+
     render() {
-        return (
-            <div className={'nav'}>
-                <ul>
-                <li>Answered</li>
-                <li>Unanswered</li>
-                </ul>
-            </div>
+        const { items } = this.props;
+        return(
+            <ul>
+                { items.map( (item) => {
+                    return   <li key={item.id}>{item.question}</li>
+                })}
+
+            </ul>
         )
     }
 }
-
 
 
 class Polls extends React.Component {
+    state = {
+        showAnswered: false
+    };
+
+    showUnanswered = () => {
+        this.setState(() => ({
+            showAnswered: false
+        }))
+    };
+
+    showAnswered = () => {
+        this.setState(() => ({
+            showAnswered: true
+        }))
+    }
 
     render() {
-        const polls = this.props.polls;
-
-        return (
+        const { showAnswered } = this.state;
+        const { answered, unanswered } = this.props;
+         return (
             <div>
-                <PollStatusNav/>
-                <ul>
-                {Object.keys(polls).map((key, index) => {
-                    return (
-                     <li>
-                         <Link to={'/poll/' + key}>
-                            {polls[key].question}
-                        </Link>
-                     </li>
-                    )
-                })
-                }
-                </ul>
+
+                <div className={'dashboard-toggle nav'}>
+                    <ul>
+                        <li className={showAnswered === true ? 'active' : null }
+                            onClick={() => this.showAnswered()}>Answered</li>
+                        <li  className={showAnswered === false ? 'active' : null }
+                            onClick={() => this.showUnanswered()}>Unanswered</li>
+                    </ul>
+                </div>
+
+
+                    <PollItems items={showAnswered === false ? unanswered : answered}/>
+
+
+
             </div>
         )
     }
 }
 
+function mapStateToProps({authedUser, polls, users}) {
 
-export default connect((state) => ({
-    polls: state.polls
-}))(Polls)
+    const answers = users[authedUser].answers;
+
+    const answered = answers.map((id) => polls[id])
+        .sort((a,b) => a.timestamp - b.timestamp);  // sort chronological
+
+    const unanswered = Object.keys(polls)
+        .filter((id) => !answers.includes(id))
+        .map((id) => polls[id])
+        .sort((a,b) => b.timestamp - a.timestamp);
+
+
+    return {
+        answered,
+        unanswered,
+    };
+}
+
+
+export default connect((mapStateToProps))(Polls)

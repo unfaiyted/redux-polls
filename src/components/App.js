@@ -1,17 +1,14 @@
 import React, { Component } from 'react'
-import {connect} from 'react-redux';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-
+import { connect } from 'react-redux';
 import Loading from "./Loading";
 
 import {
     handleInitialData
 } from "../actions/shared";
-import Nav from "./Nav";
-import Polls from "./Polls";
-import Leaderboard from "./Leaderboard";
-import PollAdd from "./PollAdd";
 
+import Nav from "./Nav";
+import AppRoutes from "./AppRoutes";
+import {BrowserRouter as Router} from "react-router-dom";
 
 class App extends Component {
     componentDidMount() {
@@ -22,29 +19,22 @@ class App extends Component {
     render() {
         const {loading} = this.props;
 
-        if(loading) {
-            return (<div>
-                <Loading />
-            </div>)
-        }
-
     return (
         <Router>
       <div className={'container'}>
           <Nav/>
-
-          <Switch>
-              <Route exact path='/' component={Polls} />
-              <Route exact path='/leaderboard' component={Leaderboard} />
-              <Route exact path='/add' component={PollAdd} />
-          </Switch>
-
+          {loading === true ? <Loading/> : <AppRoutes/>}
       </div>
         </Router>
+
     )
   }
 }
 
-export default connect((state) => ({
-    loading: state.loading
-}))(App)
+function mapStateToProps({ authedUser }) {
+    return {
+        loading: authedUser === null
+    }
+}
+
+export default connect(mapStateToProps)(App);

@@ -31,8 +31,17 @@ let users = {
       "6ni6ok3ym7mf1p33lnez": 'd'
     },
     polls: ['6ni6ok3ym7mf1p33lnez', 'xj352vofupe1dqz9emx13r'],
-  }
-}
+  },
+    danemiller: {
+        id: 'danemiller',
+        name: 'Dane Miller',
+        avatarURL: 'https://tylermcginnis.com/would-you-rather/dan.jpg',
+        answers: {
+            "xj352vofupe1dqz9emx13r": 'a',
+        },
+        polls: [],
+    }
+};
 
 let polls = {
   "8xf0y6ziyjabvozdd253nd": {

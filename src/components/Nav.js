@@ -19,7 +19,7 @@ class Nav extends React.Component {
                 <ul>
                     {
                         items.map((item) => {
-                           return    <li> <NavLink exact activeClassName='active' to={item.to}>
+                           return    <li key={item.loc}> <NavLink exact activeClassName='active' to={item.to}>
                                    {item.loc}
                            </NavLink></li>
                         })

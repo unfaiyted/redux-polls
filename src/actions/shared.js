@@ -1,19 +1,18 @@
 import { getInitialData } from '../utils/api';
+import { receivePolls} from "./polls";
+import { receiveUsers} from "./users";
+import { setAuthUser } from "./authUser";
 
-export const RECEIVE_DATA = 'RECEIVE_DATA';
 
-function receiveData(users, polls) {
-    return {
-        type: RECEIVE_DATA,
-        users,
-        polls,
-    }
-}
+// HARD CODED LOGGED IN USER FOR TESTING
+const AUTHED_ID = 'danemiller';
 
 export function handleInitialData() {
     return (dispatch) => {
         return getInitialData().then(({users, polls}) => {
-            dispatch(receiveData(users, polls));
+            dispatch(receiveUsers(users));
+            dispatch(receivePolls(polls));
+            dispatch(setAuthUser(AUTHED_ID));
         })
     }
 }
