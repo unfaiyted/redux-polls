@@ -5,12 +5,12 @@ import connect from "react-redux/es/connect/connect";
 
 class Leaderboard extends React.Component {
     render() {
-        const users = this.props.users;
+        const leaders = this.props.leaders;
         return (
             <div>
                 {
-                    Object.keys(users).map((key, i) => {
-                        return <LeaderboardUser user={users[key]} />
+                    leaders.map((leader) => {
+                        return <LeaderboardUser leader={leader} />
                     })
                 }
 
@@ -20,8 +20,26 @@ class Leaderboard extends React.Component {
     }
 }
 
-export default connect((state) => ({
-    users: state.users
-}))(Leaderboard)
+function mapStateToProps({ users }) {
+
+    const leaders = [];
+
+    Object.keys(users).map((key, i) => {
+        return  leaders.push({
+            id: users[key].id,
+            name: users[key].name,
+            avatarURL: users[key].avatarURL,
+            pollsCount: users[key].polls.length,
+            answersCount: users[key].answers.length
+        });
+    });
+
+    return {
+        leaders
+    }
+}
+
+
+export default connect(mapStateToProps)(Leaderboard)
 
 

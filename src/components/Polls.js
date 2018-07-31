@@ -1,8 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
 import { Link } from 'react-router-dom'
-import PollAdd from "./PollAdd";
-
 
 class PollItems extends React.Component {
 
@@ -11,14 +9,15 @@ class PollItems extends React.Component {
         return(
             <ul>
                 { items.map( (item) => {
-                    return   <li key={item.id}>{item.question}</li>
+                    return  ( <li key={item.id}>
+                            <Link to={'/poll/' + item.id} >  {item.question} </Link></li>
+                    )
                 })}
 
             </ul>
         )
     }
 }
-
 
 class Polls extends React.Component {
     state = {

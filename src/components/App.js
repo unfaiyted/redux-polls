@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import Loading from "./Loading";
+import LoadingBar from 'react-redux-loading'
 
 import {
     handleInitialData
@@ -23,7 +23,7 @@ class App extends Component {
         <Router>
       <div className={'container'}>
           <Nav/>
-          {loading === true ? <Loading/> : <AppRoutes/>}
+          {loading === true ? <LoadingBar/> : <AppRoutes/>}
       </div>
         </Router>
 
