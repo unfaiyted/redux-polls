@@ -8,12 +8,13 @@ class Leaderboard extends React.Component {
         const leaders = this.props.leaders;
         return (
             <div>
+                <ul>
                 {
                     leaders.map((leader) => {
                         return <LeaderboardUser leader={leader} />
                     })
                 }
-
+                </ul>
 
             </div>
         )
