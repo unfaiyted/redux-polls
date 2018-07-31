@@ -1,5 +1,7 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
+import { handleAddPoll } from "../actions/polls";
 
 
 class PollAdd extends React.Component {
@@ -12,17 +14,36 @@ class PollAdd extends React.Component {
         d: '',
     };
 
-    handleInputChange = (e) => {
 
-    }
+    handleInputChange = (e) => {
+            const { value, name } = e.target;
+
+            this.setState(() => ({
+                [name]: value
+            })
+            );
+    };
 
     isDisabled = () => {
+            const { question, a,b,c,d } = this.state;
 
-    }
+            return question === '' ||
+                a === '' ||
+                b === '' ||
+                c === '' ||
+                d === ''
+    };
 
-    handleSubmit = () => {
+    handleSubmit = (e) => {
+        e.preventDefault();
 
-    }
+         console.log('Add poll: ', this.state);
+        //
+        this.props.dispatch(handleAddPoll(this.state, () => {
+            console.log("hide this and go to the dash");
+        }))
+
+    };
 
 
     render() {
@@ -52,7 +73,7 @@ class PollAdd extends React.Component {
                 />
 
 
-                <label  className={'label'}>B.</label>
+                <label  className={'label'} htmlFor={'b'}>B.</label>
                 <input
                     className={'input'}
                     type={'text'}
@@ -61,7 +82,7 @@ class PollAdd extends React.Component {
                     onChange={this.handleInputChange}
                     name={'b'}
                 />
-                <label  className={'label'}>C.</label>
+                <label  className={'label'} htmlFor={'c'}>C.</label>
                 <input
                     className={'input'}
                     type={'text'}
@@ -70,7 +91,7 @@ class PollAdd extends React.Component {
                     onChange={this.handleInputChange}
                     name={'c'}
                 />
-                <label  className={'label'}>D.</label>
+                <label  className={'label'} htmlFor={'d'}>D.</label>
                 <input
                     className={'input'}
                     type={'text'}
@@ -80,10 +101,12 @@ class PollAdd extends React.Component {
                     name={'d'}
                 />
 
-                <button className={'btn'}>Submit </button>
+                <button className={'btn'} disabled={this.isDisabled()}>Submit </button>
             </form>
         )
     }
 }
 
-export default PollAdd;
+
+
+export default connect()(PollAdd);

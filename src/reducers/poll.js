@@ -7,7 +7,10 @@ import {
 export default function polls(state = {}, action) {
     switch(action.type) {
         case ADD_POLL:
-            return state.concat([action.poll]);
+            return {
+                ...state,
+                [action.poll.id]: action.poll,
+            }
         case REMOVE_POLL:
             return state.filter((poll) => poll.id  !== action.id);
         case RECEIVE_POLLS:
